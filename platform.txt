@@ -18,7 +18,7 @@ compiler.sdk.path={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Libra
 compiler.cores.path={runtime.platform.path}/cores/arduino
 
 ## Compile flags
-compiler.preproc.flags="-I{build.system.path}/include" "-I{compiler.cores.path}" "-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/GD32VF103_standard_peripheral" "-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/GD32VF103_standard_peripheral/Include" ""-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/GD32VF103_usbfs_driver" "-I{compiler.sdk.path}/GD32VF103_usbfs_driver/Include" "-I{compiler.sdk.path}/n22/drivers" "-I{compiler.sdk.path}/n22/env_Eclipse" "-I{compiler.sdk.path}/n22/stubs"
+compiler.preproc.flags="-I{build.system.path}/include" "-I{compiler.cores.path}" "-I{compiler.cores.path}/deprecated-avr-comp" "-I{compiler.sdk.path}/GD32VF103_standard_peripheral" "-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/GD32VF103_standard_peripheral/Include" "-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/n22/drivers" "-I{compiler.sdk.path}/n22/env_Eclipse" "-I{compiler.sdk.path}/n22/stubs" "-I{compiler.sdk.path}/Utilities" "-I{compiler.sdk.path}/Utilities/LCD_common"
 
 compiler.both.flags= -Os -Wall -march=rv32imac -mabi=ilp32 -mcmodel=medlow -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common
 
@@ -26,9 +26,9 @@ compiler.debug.flags=
 
 compiler.c.flags=-c {compiler.debug.flags} {compiler.both.flags} {compiler.preproc.flags} -std=gnu11
 
-compiler.cpp.flags=-c {compiler.debug.flags} {compiler.both.flags} {compiler.preproc.flags} -std=gnu++17
+compiler.cpp.flags=-c {compiler.debug.flags} {compiler.both.flags} {compiler.preproc.flags} -std=gnu++17 -fpermissive 
 
-compiler.ld.flags=-march=rv32imac -mabi=ilp32 -mcmodel=medlow -nostartfiles -Xlinker --gc-sections --specs=nano.specs -Os -T {build.ldscript}
+compiler.ld.flags=-march=rv32imac -mabi=ilp32 -mcmodel=medlow -nostartfiles -Xlinker --gc-sections --specs=nano.specs -Os -T {build.ldscript} -Wl,--wrap=puts
 
 compiler.S.flags=-c {compiler.debug.flags} {compiler.both.flags} {compiler.preproc.flags} -x assembler-with-cpp
 
@@ -76,7 +76,7 @@ recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} -D
 recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{archive_file_path}" "{object_file}"
 
 ## Link gc-sections, archives, and objects
-recipe.c.combine.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.ld.flags} {build.extra_flags} {object_files} -o "{build.path}/{build.project_name}.elf" -Wl,--start-group "{archive_file_path}" -lc -Wl,--end-group
+recipe.c.combine.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.ld.flags} {build.extra_flags} {object_files} -o "{build.path}/{build.project_name}.elf" -Wl,--start-group -lc -Wl,--end-group -Wl,--start-group -lc "{archive_file_path}" -Wl,--end-group
 
 ## Create binary
 recipe.objcopy.eep.pattern="{compiler.path}{compiler.objcopy.cmd}" {compiler.objcopy.eep.flags} --output-format=binary "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.bin"
@@ -96,16 +96,12 @@ recipe.output.save_file={build.project_name}.{build.variant}.bin
 ## GD-Link
 tools.gdlink.cmd=openocd
 tools.gdlink.path={runtime.tools.openocd.path}/bin/
-tools.gdlink.program.params.verbose=-d2
-tools.gdlink.program.params.quiet=-d0
-tools.gdlink.program.config={runtime.tools.openocd.path}/scripts/temp/openocd_gd-link.cfg
+tools.gdlink.program.config={runtime.tools.openocd.path}/scripts/temp/openocd_gdlink.cfg
 tools.gdlink.program.pattern="{path}{cmd}" -d0 -f {program.config} -c "flash protect 0 0 last off; program {{build.path}/{build.project_name}.elf} verify; resume 0x20000000; exit;"
 
 ## JLink
 tools.jlink.cmd=openocd
 tools.jlink.path={runtime.tools.openocd.path}/bin/
-tools.jlink.program.params.verbose=-d2
-tools.jlink.program.params.quiet=-d0
 tools.jlink.program.config={runtime.tools.openocd.path}/scripts/temp/openocd_jlink.cfg
 tools.jlink.program.pattern="{path}{cmd}" -d0 -f {program.config} -c "flash protect 0 0 last off; program {{build.path}/{build.project_name}.elf} verify; resume 0x20000000; exit;"
 

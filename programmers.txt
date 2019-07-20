@@ -1,0 +1,11 @@
+gdlink.name=GD-Link OpenOCD
+gdlink.communication=usb
+gdlink.program.params.verbose=-v
+gdlink.program.params.quiet=-q
+gdlink.program.tool=gdlink
+
+jlink.name=JLink OpenOCD
+jlink.communication=usb
+jlink.program.params.verbose=-v
+jlink.program.params.quiet=-q
+jlink.program.tool=jlink

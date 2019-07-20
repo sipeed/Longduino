@@ -11,7 +11,7 @@ eval.name=GD32VF103 EVAL Board
 eval.menu.toolsloc.default=Default
 eval.menu.toolsloc.default.compiler.path={runtime.tools.riscv64-unknown-elf-gcc.path}/bin/
 
-CPU Clock
+## CPU Clock
 eval.menu.clksrc.108=108MHz CPU Clock Frequency
 eval.menu.clksrc.108.build.f_cpu=108000000L
 
@@ -30,8 +30,8 @@ eval.build.board=BOARD_GD32VF103_EVAL_BOARD
 eval.build.sdata.size=512
 
 ## This selects the tool from "programmers.txt"
-eval.program.tool=gd-link
-eval.upload.tool=gd-link
+eval.program.tool=gdlink
+eval.upload.tool=gdlink
 
 ## Limit is the 128KiB Flash. Assume half is used for something else.
 eval.upload.maximum_size=65536

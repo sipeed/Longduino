@@ -32,7 +32,7 @@ ssize_t _write(int fd, const void* ptr, size_t len) {
 	return _stub(EBADF);
 }
 
-int puts(const char* string) {
+int __wrap_puts(const char* string) {
 	return _write(0, (const void *) string, strlen(string));
 }
 
