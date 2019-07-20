@@ -1,0 +1,85 @@
+{
+    "packages": [
+    {    "name": "gd32vduino",
+        "maintainer": "Sipeed",
+        "websiteURL": "https://www.sipeed.com",
+        "email": "bits@sipeed.com",
+        "help": {
+            "online": "https://www.sipeed.com"
+        },
+        "platforms": [
+            {
+                "category": "gd32vduino",
+                "name": "gd32vduino",
+                "version": "0.1.0",
+                "url": "https://bigbits.oss-cn-qingdao.aliyuncs.com/Arduino_for_GD32V/core-gd32v-0.1.0.zip",
+                "checksum": "SHA-256:315C5045BE1E1D72FADD740C13B6D105D74C28AB387845B5BABD1BED82D81792",
+                "archiveFileName": "core-gd32v-0.1.0.zip",
+                "size": "797350",
+                "architecture": "gd32v",
+                "boards": [
+                    {
+                        "name": "GD32VF103 EVAL Board"
+                    }
+                ],
+                "toolsDependencies": [
+                    {
+                        "packager": "gd32vduino",
+                        "version": "8.2.0-2019.02.0",
+                        "name": "riscv64-unknown-elf-gcc"
+                    },
+                    {
+                        "packager": "gd32vduino",
+                        "version": "0.1.0",
+                        "name": "openocd"
+                    },
+                    {
+                        "packager": "gd32vduino",
+                        "version": "0.1.0",
+                        "name": "stm32duino"
+                    }
+                ]
+
+            }
+        ],
+        "tools": [
+            {
+                "version": "8.2.0-2019.02.0",
+                "name":"riscv64-unknown-elf-gcc",
+                "systems":
+                {
+                    "url": "https://bigbits.oss-cn-qingdao.aliyuncs.com/Arduino_for_GD32V/riscv64-unknown-elf-gcc-8.2.0-2019.02.0.zip",
+                    "checksum": "SHA-256:A86088A046B7AE32474A59E77F4F30AFD50D68F980A9D53CB52A3C63B88FE8AE",
+                    "host": "i686-mingw32",
+                    "archiveFileName": "riscv64-unknown-elf-gcc-8.2.0-2019.02.0.zip",
+                    "size": "154093793"
+                }
+            },
+            {
+                "version": "0.1.0",
+                "name": "openocd",
+                "systems":
+                {
+                    "url": "https://bigbits.oss-cn-qingdao.aliyuncs.com/Arduino_for_GD32V/tools-openocd-0.1.0.zip",
+                    "checksum": "SHA-256:2234D65CC79F5EE911FA8CB234A47D2E2C3A11BB790D532F026186AECE4B119B",
+                    "host": "i686-mingw32",
+                    "archiveFileName": "tools-openocd-0.1.0.zip",
+                    "size": "3024398"
+                }
+            },
+            {
+                "version": "0.1.0",
+                "name": "stm32duino",
+                "systems":
+                {
+                    "url": "https://bigbits.oss-cn-qingdao.aliyuncs.com/Arduino_for_GD32V/tools-stm32duino-0.1.0.zip",
+                    "checksum": "SHA-256:53D62AF04A6CD4AC28577FD3B3780FF50B2A8E065715FE72B3E58A07161B95D8",
+                    "host": "i686-mingw32",
+                    "archiveFileName": "tools-stm32duino-0.1.0.zip",
+                    "size": "5656564"
+                }
+            }
+        ]
+    }
+    ]
+}
