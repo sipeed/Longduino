@@ -13,8 +13,9 @@ extern "C"{ void * __dso_handle = 0 ;}
  */
 int main( void )
 {
+  //FIXME: only eval board can use this function.
+  gd_eval_com_init(EVAL_COM0);  //init usart0 to use printf.
 
-  gd_eval_com_init(EVAL_COM0);
   setup();
   
   do {

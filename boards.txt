@@ -26,7 +26,7 @@ eval.build.variant=gd32vf103_eval
 eval.build.core=arduino
 
 ## This sets a define for use in the compiled code.
-eval.build.board=BOARD_GD32VF103_EVAL_BOARD
+eval.build.board=BOARD_GD32VF103_EVAL
 eval.build.sdata.size=512
 
 ## This selects the tool from "programmers.txt"
