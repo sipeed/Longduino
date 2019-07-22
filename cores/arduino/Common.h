@@ -107,27 +107,27 @@ typedef uint32_t pin_size_t;
 typedef uint8_t pin_size_t;
 #endif
 
-void pinMode(pin_map_t pinNumber, PinMode pinMode);
-void digitalWrite(pin_map_t pinNumber, PinStatus status);
-PinStatus digitalRead(pin_map_t pinNumber);
+void pinMode(pin_size_t pinNumber, PinMode pinMode);
+void digitalWrite(pin_size_t pinNumber, PinStatus status);
+PinStatus digitalRead(pin_size_t pinNumber);
 
-int analogRead(pin_size_t pinNumber);
-void analogReference(uint8_t mode);
-void analogWrite(pin_size_t pinNumber, int value);
+int analogRead(pin_size_t pinNumber);  //TODO
+void analogReference(uint8_t mode); //TODO
+void analogWrite(pin_size_t pinNumber, int value);//TODO
 
 unsigned long millis(void);
 unsigned long micros(void);
 void delay(unsigned long);
 void delayMicroseconds(unsigned int us);
-unsigned long pulseIn(pin_size_t pin, uint8_t state, unsigned long timeout);
-unsigned long pulseInLong(pin_size_t pin, uint8_t state, unsigned long timeout);
+unsigned long pulseIn(pin_size_t pin, uint8_t state, unsigned long timeout);//TODO
+unsigned long pulseInLong(pin_size_t pin, uint8_t state, unsigned long timeout);//TODO
 
-void shiftOut(pin_size_t dataPin, pin_size_t clockPin, BitOrder bitOrder, uint8_t val);
-pin_size_t shiftIn(pin_size_t dataPin, pin_size_t clockPin, BitOrder bitOrder);
+void shiftOut(pin_size_t dataPin, pin_size_t clockPin, BitOrder bitOrder, uint8_t val);//TODO
+pin_size_t shiftIn(pin_size_t dataPin, pin_size_t clockPin, BitOrder bitOrder);//TODO
 
-void attachInterrupt(pin_size_t interruptNumber, voidFuncPtr callback, PinStatus mode);
-void attachInterruptParam(pin_size_t interruptNumber, voidFuncPtrParam callback, PinStatus mode, void* param);
-void detachInterrupt(pin_size_t interruptNumber);
+void attachInterrupt(pin_size_t interruptNumber, voidFuncPtr callback, PinStatus mode);//TODO
+void attachInterruptParam(pin_size_t interruptNumber, voidFuncPtrParam callback, PinStatus mode, void* param);//TODO
+void detachInterrupt(pin_size_t interruptNumber);//TODO
 
 void setup(void);
 void loop(void);
@@ -144,11 +144,11 @@ uint16_t makeWord(byte h, byte l);
 
 #define word(...) makeWord(__VA_ARGS__)
 
-unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L);
-unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L);
+unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L);//TODO
+unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L);//TODO
 
-void tone(uint8_t _pin, unsigned int frequency, unsigned long duration = 0);
-void noTone(uint8_t _pin);
+void tone(uint8_t _pin, unsigned int frequency, unsigned long duration = 0);//TODO
+void noTone(uint8_t _pin);//TODO
 
 // WMath prototypes
 long random(long);

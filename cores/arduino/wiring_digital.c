@@ -25,30 +25,11 @@
 extern "C" {
 #endif
 
-#define pinToPort(p) (_pin_to_port[(uint8_t)(p)])
-
-uint32_t _pin_to_port[80] = {  GPIOA, GPIOA, GPIOA, GPIOA, GPIOA, GPIOA, GPIOA, GPIOA, GPIOA, GPIOA, GPIOA, GPIOA, GPIOA, GPIOA, GPIOA, GPIOA,
-                               GPIOB, GPIOB, GPIOB, GPIOB, GPIOB, GPIOB, GPIOB, GPIOB, GPIOB, GPIOB, GPIOB, GPIOB, GPIOB, GPIOB, GPIOB, GPIOB,
-                               GPIOC, GPIOC, GPIOC, GPIOC, GPIOC, GPIOC, GPIOC, GPIOC, GPIOC, GPIOC, GPIOC, GPIOC, GPIOC, GPIOC, GPIOC, GPIOC,
-                               GPIOD, GPIOD, GPIOD, GPIOD, GPIOD, GPIOD, GPIOD, GPIOD, GPIOD, GPIOD, GPIOD, GPIOD, GPIOD, GPIOD, GPIOD, GPIOD,
-                               GPIOE, GPIOE, GPIOE, GPIOE, GPIOE, GPIOE, GPIOE, GPIOE, GPIOE, GPIOE, GPIOE, GPIOE, GPIOE, GPIOE, GPIOE, GPIOE
-};
-
-#define pinToGpioPin(p) (_pin_to_gpio_pin[p])
-
-uint32_t _pin_to_gpio_pin[80] = { GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15,   
-                                  GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15,
-                                  GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15,
-                                  GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15,
-                                  GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15
-};
-
-void pinMode(pin_map_t ulPin, PinMode ulMode)
+void pinMode(pin_size_t pinNumber, PinMode pinMode)
 {
+    if (pinNumber >= VARIANT_GPIO_NUM) return;
     uint8_t mode;
-    uint32_t port = pinToPort(ulPin);
-    uint32_t pin = pinToGpioPin(ulPin);
-    switch (ulMode)
+    switch (pinMode)
     {
     case INPUT:
         mode = GPIO_MODE_IN_FLOATING;
@@ -63,20 +44,21 @@ void pinMode(pin_map_t ulPin, PinMode ulMode)
         mode = GPIO_MODE_IPD;
         break;
     default:
-        break;
+        return;
     }
-    gpio_init(port, GPIO_OSPEED_10MHZ, mode, pin);
+    rcu_periph_clock_enable(PIN_MAP[pinNumber].gpio_device->clk_id);
+    gpio_init(PIN_MAP[pinNumber].gpio_device->gpio_port, VARIANT_GPIO_OSPEED, mode, PIN_MAP[pinNumber].gpio_bit);
+    GPIO_BC(PIN_MAP[pinNumber].gpio_device->gpio_port) = (uint32_t)PIN_MAP[pinNumber].gpio_bit;
     return;
 }
 
-void digitalWrite(pin_map_t ulPin, PinStatus ulVal)
+void digitalWrite(pin_size_t pinNumber , PinStatus status)
 {
-    uint32_t port = pinToPort(ulPin);
-    uint32_t pin = pinToGpioPin(ulPin);
-    if (LOW != ulVal) {
-        GPIO_BOP(port) = (uint32_t)pin;
+    if (pinNumber >= VARIANT_GPIO_NUM) return;
+    if (LOW != status) {
+        GPIO_BOP(PIN_MAP[pinNumber].gpio_device->gpio_port) = (uint32_t)PIN_MAP[pinNumber].gpio_bit;
     } else {
-        GPIO_BC(port) = (uint32_t)pin;
+        GPIO_BC(PIN_MAP[pinNumber].gpio_device->gpio_port) = (uint32_t)PIN_MAP[pinNumber].gpio_bit;
     }
     return;
 }

@@ -1,11 +1,11 @@
 #include "Arduino.h"
 #include "gd32vf103.h"
 
-unsigned long millis(){
+unsigned long millis(void){
     return (unsigned long)(get_timer_value() * (SystemCoreClock/4000.0));
 }
 
-unsigned long micros(){
+unsigned long micros(void){
     return (unsigned long)(get_timer_value() * (SystemCoreClock/4000000.0));
 }
 
