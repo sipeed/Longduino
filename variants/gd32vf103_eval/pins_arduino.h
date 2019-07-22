@@ -49,7 +49,7 @@ extern const gd32v_pin_info_t PIN_MAP[VARIANT_GPIO_NUM];
 #define digitalPinToPort(p) ((PIN_MAP[p].gpio_device)->gpio_port)
 #define digitalPinToBitMask(p) (BIT(PIN_MAP[p].gpio_bit))
 
-#define VARIANT_GPIO_OSPEED GPIO_OSPEED_10MHZ //
+#define VARIANT_GPIO_OSPEED GPIO_OSPEED_50MHZ //
 
 #ifdef __cplusplus
 }
