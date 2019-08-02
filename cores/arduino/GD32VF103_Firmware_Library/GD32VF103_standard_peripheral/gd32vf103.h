@@ -55,7 +55,7 @@ OF SUCH DAMAGE.
  #define     __IO    volatile             /*!< Defines 'read / write' permissions              */
 
 
-#define HXTAL_VALUE    ((uint32_t)8000000) /*!< value of the external oscillator in Hz */
+//#define HXTAL_VALUE    ((uint32_t)8000000) /*!< value of the external oscillator in Hz */
 
 /* define startup timeout value of high speed crystal oscillator (HXTAL) */
 #if !defined  (HXTAL_STARTUP_TIMEOUT)
