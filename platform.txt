@@ -1,5 +1,5 @@
 name=gd32vduino
-version=0.1.0
+version=0.1.1
 
 # Compile variables
 
@@ -18,7 +18,7 @@ compiler.sdk.path={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Libra
 compiler.cores.path={runtime.platform.path}/cores/arduino
 
 ## Compile flags
-compiler.preproc.flags="-I{build.system.path}/include" "-I{compiler.cores.path}" "-I{compiler.cores.path}/deprecated-avr-comp" "-I{compiler.sdk.path}/GD32VF103_standard_peripheral" "-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/GD32VF103_standard_peripheral/Include" "-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/n22/drivers" "-I{compiler.sdk.path}/n22/env_Eclipse" "-I{compiler.sdk.path}/n22/stubs" "-I{compiler.sdk.path}/Utilities" "-I{compiler.sdk.path}/Utilities/LCD_common"
+compiler.preproc.flags="-I{build.system.path}/include" "-I{compiler.cores.path}" "-I{compiler.cores.path}/deprecated-avr-comp" "-I{compiler.sdk.path}/GD32VF103_standard_peripheral" "-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/GD32VF103_standard_peripheral/Include" "-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/RISCV/drivers" "-I{compiler.sdk.path}/RISCV/env_Eclipse" "-I{compiler.sdk.path}/n22/stubs" "-I{compiler.sdk.path}/Utilities" "-I{compiler.sdk.path}/Utilities/LCD_common"
 
 compiler.both.flags= -Os -Wall -march=rv32imac -mabi=ilp32 -mcmodel=medlow -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common
 
@@ -28,7 +28,7 @@ compiler.c.flags=-c {compiler.debug.flags} {compiler.both.flags} {compiler.prepr
 
 compiler.cpp.flags=-c {compiler.debug.flags} {compiler.both.flags} {compiler.preproc.flags} -std=gnu++17 -fpermissive 
 
-compiler.ld.flags=-march=rv32imac -mabi=ilp32 -mcmodel=medlow -nostartfiles -Xlinker --gc-sections --specs=nano.specs -Os -T {build.ldscript} -Wl,--wrap=puts
+compiler.ld.flags=-march=rv32imac -mabi=ilp32 -mcmodel=medlow -nostartfiles -Xlinker --gc-sections --specs=nano.specs -Os -T {build.ldscript} -Wl,--wrap=puts 
 
 compiler.S.flags=-c {compiler.debug.flags} {compiler.both.flags} {compiler.preproc.flags} -x assembler-with-cpp
 
@@ -40,13 +40,13 @@ compiler.elf2hex.flags=-R .rel.dyn
 
 compiler.define=-DARDUINO=
 
-compiler.c.extra_flags=-DF_CPU={build.f_cpu} -D{build.board} -DUSE_STDPERIPH_DRIVER
+compiler.c.extra_flags=-DF_CPU={build.f_cpu} -D{build.board} -DUSE_STDPERIPH_DRIVER -DHXTAL_VALUE={build.hxtal_value}
 
 compiler.c.elf.extra_flags=
 
-compiler.cpp.extra_flags=-DF_CPU={build.f_cpu} -D{build.board} -DUSE_STDPERIPH_DRIVER
+compiler.cpp.extra_flags=-DF_CPU={build.f_cpu} -D{build.board} -DUSE_STDPERIPH_DRIVER -DHXTAL_VALUE={build.hxtal_value}
 
-compiler.S.extra_flags=-DF_CPU={build.f_cpu} -D{build.board} -DUSE_STDPERIPH_DRIVER
+compiler.S.extra_flags=-DF_CPU={build.f_cpu} -D{build.board} -DUSE_STDPERIPH_DRIVER -DHXTAL_VALUE={build.hxtal_value}
 
 compiler.ar.extra_flags=
 
@@ -105,3 +105,7 @@ tools.jlink.path={runtime.tools.openocd.path}/bin/
 tools.jlink.program.config={runtime.tools.openocd.path}/scripts/temp/openocd_jlink.cfg
 tools.jlink.program.pattern="{path}{cmd}" -d0 -f {program.config} -c "flash protect 0 0 last off; program {{build.path}/{build.project_name}.elf} verify; resume 0x20000000; exit;"
 
+## Serial
+tools.serial.cmd=stm32flash
+tools.serial.path={runtime.tools.stm32duino.path}/
+tools.serial.program.pattern="{path}{cmd}" -g 0x08000000 -b {build.burn_baudrate} -w {build.path}/{build.project_name}.bin {serial.port} 

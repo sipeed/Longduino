@@ -8,7 +8,7 @@
 /* BOARD  PIN DEFINE */
 
 /* LEDs */
-#define LED_BUILTIN  PC0
+#define LED_BUILTIN  PC13
 
 #ifdef __cplusplus
 extern "C" {
@@ -49,6 +49,7 @@ extern const gd32v_pin_info_t PIN_MAP[VARIANT_GPIO_NUM];
 #define digitalPinToPort(p) ((PIN_MAP[p].gpio_device)->gpio_port)
 #define digitalPinToBitMask(p) (BIT(PIN_MAP[p].gpio_bit))
 #define digitalPinToClkid(p) (PIN_MAP[p].gpio_device->clk_id)
+
 
 #define VARIANT_GPIO_OSPEED GPIO_OSPEED_50MHZ //
 

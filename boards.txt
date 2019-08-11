@@ -3,6 +3,45 @@ menu.burn_baudrate=Burn Baud Rate
 menu.toolsloc=Tool Install Location
 
 ##################################################
+############# Sipeed Longan Nano Board ###############
+
+nano.name=Sipeed Longan Nano Board
+
+## Toolchain
+nano.menu.toolsloc.default=Default
+nano.menu.toolsloc.default.compiler.path={runtime.tools.riscv64-unknown-elf-gcc.path}/bin/
+
+## CPU Clock
+nano.menu.clksrc.108=108MHz CPU Clock Frequency
+nano.menu.clksrc.108.build.f_cpu=108000000L
+
+## Burn baud rate
+nano.menu.burn_baudrate.115200=115200 bps
+nano.menu.burn_baudrate.115200.build.burn_baudrate=115200
+
+## HXTAL freq value
+nano.build.hxtal_value=25000000UL
+
+## Point to the file for ./variants/<variant>/pins_arduino.h
+nano.build.variant=sipeed-longan-nano
+
+## "The 'core' file directory for this board, in ./cores
+nano.build.core=arduino
+
+## This sets a define for use in the compiled code.
+nano.build.board=BOARD_SIPEED_LONGAN_NANO
+nano.build.sdata.size=512
+
+## This selects the tool from "programmers.txt"
+nano.program.tool=serial
+nano.upload.tool=serial
+
+## Limit is the 128KiB Flash. Assume half is used for something else.
+nano.upload.maximum_size=65536
+nano.build.ldscript={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103x8.lds
+
+
+##################################################
 ############# GD32VF103 EVAL Board ###############
 
 eval.name=GD32VF103 EVAL Board
@@ -18,6 +57,9 @@ eval.menu.clksrc.108.build.f_cpu=108000000L
 ## Burn baud rate
 eval.menu.burn_baudrate.115200=115200 bps
 eval.menu.burn_baudrate.115200.build.burn_baudrate=115200
+
+## HXTAL freq value
+eval.build.hxtal_value=8000000UL
 
 ## Point to the file for ./variants/<variant>/pins_arduino.h
 eval.build.variant=gd32vf103_eval
@@ -35,5 +77,5 @@ eval.upload.tool=gdlink
 
 ## Limit is the 128KiB Flash. Assume half is used for something else.
 eval.upload.maximum_size=65536
-eval.build.ldscript={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Library/n22/env_Eclipse/GD32VF103xB.lds
+eval.build.ldscript={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103xB.lds
 

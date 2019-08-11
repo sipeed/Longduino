@@ -9,3 +9,9 @@ jlink.communication=usb
 jlink.program.params.verbose=-v
 jlink.program.params.quiet=-q
 jlink.program.tool=jlink
+
+serial.name=Serial GD32V
+serial.communication=usb
+serial.program.params.verbose=-v
+serial.program.params.quiet=-q
+serial.program.tool=serial

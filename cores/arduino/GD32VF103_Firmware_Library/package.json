@@ -1,6 +1,6 @@
 {
     "name": "framework-gd32vf103_firmware_library",
     "description": "This is gd32vf103 firmware library",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "url": "https://www.sipeed.com"
 }

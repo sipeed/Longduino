@@ -11,6 +11,38 @@
             {
                 "category": "gd32vduino",
                 "name": "gd32vduino",
+                "version": "0.1.1",
+                "url": "https://bigbits.oss-cn-qingdao.aliyuncs.com/Arduino_for_GD32V/core-gd32v-0.1.1.zip",
+                "checksum": "SHA-256:315C5045BE1E1D72FADD740C13B6D105D74C28AB387845B5BABD1BED82D81792",
+                "archiveFileName": "core-gd32v-0.1.0.zip",
+                "size": "797350",
+                "architecture": "gd32v",
+                "boards": [
+                    {"name": "Sipeed Longan Nano Board"},
+                    {"name": "GD32VF103 EVAL Board"}
+                ],
+                "toolsDependencies": [
+                    {
+                        "packager": "gd32vduino",
+                        "version": "8.2.0-2019.02.0",
+                        "name": "riscv64-unknown-elf-gcc"
+                    },
+                    {
+                        "packager": "gd32vduino",
+                        "version": "0.1.0",
+                        "name": "openocd"
+                    },
+                    {
+                        "packager": "gd32vduino",
+                        "version": "0.1.0",
+                        "name": "stm32duino"
+                    }
+                ]
+
+            },
+            {
+                "category": "gd32vduino",
+                "name": "gd32vduino",
                 "version": "0.1.0",
                 "url": "https://bigbits.oss-cn-qingdao.aliyuncs.com/Arduino_for_GD32V/core-gd32v-0.1.0.zip",
                 "checksum": "SHA-256:315C5045BE1E1D72FADD740C13B6D105D74C28AB387845B5BABD1BED82D81792",
@@ -39,7 +71,6 @@
                         "name": "stm32duino"
                     }
                 ]
-
             }
         ],
         "tools": [

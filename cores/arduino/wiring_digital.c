@@ -46,9 +46,9 @@ void pinMode(pin_size_t pinNumber, PinMode pinMode)
     default:
         return;
     }
-    rcu_periph_clock_enable(PIN_MAP[pinNumber].gpio_device->clk_id);
-    gpio_init(PIN_MAP[pinNumber].gpio_device->gpio_port, mode, VARIANT_GPIO_OSPEED, BIT(PIN_MAP[pinNumber].gpio_bit));
-    GPIO_BC(PIN_MAP[pinNumber].gpio_device->gpio_port) = BIT(PIN_MAP[pinNumber].gpio_bit);
+    rcu_periph_clock_enable(digitalPinToClkid(pinNumber));
+    gpio_init(digitalPinToPort(pinNumber), mode, VARIANT_GPIO_OSPEED, digitalPinToBitMask(pinNumber));
+    GPIO_BC(digitalPinToPort(pinNumber)) = digitalPinToBitMask(pinNumber);
     return;
 }
 
@@ -57,10 +57,10 @@ void digitalWrite(pin_size_t pinNumber , PinStatus status)
     if (pinNumber >= VARIANT_GPIO_NUM) return;
     if (LOW != status) {
         //gpio_bit_set(PIN_MAP[pinNumber].gpio_device->gpio_port, PIN_MAP[pinNumber].gpio_bit);
-        GPIO_BOP(PIN_MAP[pinNumber].gpio_device->gpio_port) = BIT(PIN_MAP[pinNumber].gpio_bit);
+        GPIO_BOP(digitalPinToPort(pinNumber)) = digitalPinToBitMask(pinNumber);
     } else {
        //gpio_bit_reset(PIN_MAP[pinNumber].gpio_device->gpio_port, PIN_MAP[pinNumber].gpio_bit);
-        GPIO_BC(PIN_MAP[pinNumber].gpio_device->gpio_port) = BIT(PIN_MAP[pinNumber].gpio_bit);
+        GPIO_BC(digitalPinToPort(pinNumber)) = digitalPinToBitMask(pinNumber);
     }
     return;
 }
