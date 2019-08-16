@@ -4,21 +4,21 @@ version=0.1.1
 # Compile variables
 
 ## GCC tools path
-compiler.path={runtime.tools.riscv64-unknown-elf-gcc.path}/bin/
-compiler.c.cmd=riscv64-unknown-elf-gcc
-compiler.cpp.cmd=riscv64-unknown-elf-g++
-compiler.ld.cmd=riscv64-unknown-elf-ld
-compiler.ar.cmd=riscv64-unknown-elf-gcc-ar
-compiler.objcopy.cmd=riscv64-unknown-elf-objcopy
-compiler.elf2hex.cmd=riscv64-unknown-elf-objcopy
-compiler.size.cmd=riscv64-unknown-elf-size
+compiler.path={runtime.tools.riscv32-nuclei-elf-gcc.path}/bin/
+compiler.c.cmd=riscv32-nuclei-elf-gcc
+compiler.cpp.cmd=riscv32-nuclei-elf-g++
+compiler.ld.cmd=riscv32-nuclei-elf-ld
+compiler.ar.cmd=riscv32-nuclei-elf-gcc-ar
+compiler.objcopy.cmd=riscv32-nuclei-elf-objcopy
+compiler.elf2hex.cmd=riscv32-nuclei-elf-objcopy
+compiler.size.cmd=riscv32-nuclei-elf-size
 
 ## C CODE path
 compiler.sdk.path={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Library
 compiler.cores.path={runtime.platform.path}/cores/arduino
 
 ## Compile flags
-compiler.preproc.flags="-I{build.system.path}/include" "-I{compiler.cores.path}" "-I{compiler.cores.path}/deprecated-avr-comp" "-I{compiler.sdk.path}/GD32VF103_standard_peripheral" "-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/GD32VF103_standard_peripheral/Include" "-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/RISCV/drivers" "-I{compiler.sdk.path}/RISCV/env_Eclipse" "-I{compiler.sdk.path}/n22/stubs" "-I{compiler.sdk.path}/Utilities" "-I{compiler.sdk.path}/Utilities/LCD_common"
+compiler.preproc.flags="-I{build.system.path}/include" "-I{compiler.cores.path}" "-I{compiler.cores.path}/deprecated-avr-comp" "-I{compiler.sdk.path}/GD32VF103_standard_peripheral" "-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/GD32VF103_standard_peripheral/Include" "-I{compiler.cores.path}/avr" "-I{compiler.sdk.path}/RISCV/drivers" "-I{compiler.sdk.path}/RISCV/env_Eclipse" "-I{compiler.sdk.path}/RISCV/stubs" "-I{compiler.sdk.path}/Utilities" "-I{compiler.sdk.path}/Utilities/LCD_common"
 
 compiler.both.flags= -Os -Wall -march=rv32imac -mabi=ilp32 -mcmodel=medlow -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common
 
