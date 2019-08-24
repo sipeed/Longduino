@@ -4,14 +4,14 @@ version=0.1.1
 # Compile variables
 
 ## GCC tools path
-compiler.path={runtime.tools.riscv32-nuclei-elf-gcc.path}/bin/
-compiler.c.cmd=riscv32-nuclei-elf-gcc
-compiler.cpp.cmd=riscv32-nuclei-elf-g++
-compiler.ld.cmd=riscv32-nuclei-elf-ld
-compiler.ar.cmd=riscv32-nuclei-elf-gcc-ar
-compiler.objcopy.cmd=riscv32-nuclei-elf-objcopy
-compiler.elf2hex.cmd=riscv32-nuclei-elf-objcopy
-compiler.size.cmd=riscv32-nuclei-elf-size
+compiler.path={runtime.tools.riscv64-unknown-elf-gcc.path}/bin/
+compiler.c.cmd=riscv64-unknown-elf-gcc
+compiler.cpp.cmd=riscv64-unknown-elf-g++
+compiler.ld.cmd=riscv64-unknown-elf-ld
+compiler.ar.cmd=riscv64-unknown-elf-gcc-ar
+compiler.objcopy.cmd=riscv64-unknown-elf-objcopy
+compiler.elf2hex.cmd=riscv64-unknown-elf-objcopy
+compiler.size.cmd=riscv64-unknown-elf-size
 
 ## C CODE path
 compiler.sdk.path={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Library

@@ -9,7 +9,7 @@ nano.name=Sipeed Longan Nano Board
 
 ## Toolchain
 nano.menu.toolsloc.default=Default
-nano.menu.toolsloc.default.compiler.path={runtime.tools.riscv32-nuclei-elf-gcc.path}/bin/
+nano.menu.toolsloc.default.compiler.path={runtime.tools.riscv64-unknown-elf-gcc.path}/bin/
 
 ## CPU Clock
 nano.menu.clksrc.108=108MHz CPU Clock Frequency
@@ -48,7 +48,7 @@ eval.name=GD32VF103 EVAL Board
 
 ## Toolchain
 eval.menu.toolsloc.default=Default
-eval.menu.toolsloc.default.compiler.path={runtime.tools.riscv32-nuclei-elf-gcc.path}/bin/
+eval.menu.toolsloc.default.compiler.path={runtime.tools.riscv64-unknown-elf-gcc.path}/bin/
 
 ## CPU Clock
 eval.menu.clksrc.108=108MHz CPU Clock Frequency

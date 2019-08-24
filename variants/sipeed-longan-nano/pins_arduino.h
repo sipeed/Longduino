@@ -9,6 +9,9 @@
 
 /* LEDs */
 #define LED_BUILTIN  PC13
+#define LED_RED      PC13
+#define LED_GREEN    PA1
+#define LED_BLUE     PA2
 
 #ifdef __cplusplus
 extern "C" {
