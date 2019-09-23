@@ -29,7 +29,7 @@
 #include "Client.h"
 #include "HardwareI2C.h"
 #include "HardwareSerial.h"
-#include "Interrupts.h"
+#include "WInterrupts.h"
 #include "IPAddress.h"
 #include "Print.h"
 #include "Printable.h"

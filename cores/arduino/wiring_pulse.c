@@ -14,7 +14,7 @@ union _mcycle_full {
 static inline uint64_t get_mcycle(void) {
     union _mcycle_full ret;
     __asm("rdcycle %[l]" : [ l ] "=r"(ret.v_part[0]) :);
-    __asm("rdcycle %[h]" : [ h ] "=r"(ret.v_part[1]) :);
+    __asm("rdcycleh %[h]" : [ h ] "=r"(ret.v_part[1]) :);
     return ret.v;
 }
 
