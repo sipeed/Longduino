@@ -34,3 +34,4 @@
 # vscode
 .vscode
 
+.package_gd32v_index.json
