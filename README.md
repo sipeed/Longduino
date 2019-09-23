@@ -13,3 +13,6 @@ Add follow url into `Boards Manager URLs`.
 ```
 http://bigbits.oss-cn-qingdao.aliyuncs.com/Arduino_for_GD32V/package_longduino_index.json
 ```
+## TODO List
+
+See [Todo list](https://github.com/sipeed/Longduino/issues/1).
