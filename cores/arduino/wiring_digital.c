@@ -65,19 +65,21 @@ void digitalWrite(pin_size_t pinNumber , PinStatus status)
     return;
 }
 
-// PinStatus digitalRead(pin_map_t ulPin)
-// {
-//     if ((uint32_t) LOW != (GPIO_ISTAT(pinToPort(ulPin)) & (pinToGpioPin(ulPin)))) {
-//         return HIGH;
-//     } else {
-//         return LOW;
-//     }
-// }
+PinStatus digitalRead(pin_size_t pinNumber)
+{
+    if (pinNumber >= VARIANT_GPIO_NUM) return LOW;
 
-// void digitalToggle(pin_map_t ulPin)
-// {
-//     return gpio_bit_write(pinToPort(ulPin), pinToGpioPin(ulPin), gpio_output_bit_get(pinToPort(ulPin), pinToGpioPin(ulPin)));
-// }
+    if ((uint32_t) LOW != (GPIO_ISTAT(digitalPinToPort(pinNumber)) & digitalPinToBitMask(pinNumber))) {
+        return HIGH;
+    } else {
+        return LOW;
+    }
+}
+
+void digitalToggle(pin_size_t pinNumber)
+{
+    return gpio_bit_write(digitalPinToPort(pinNumber), digitalPinToBitMask(pinNumber), !gpio_output_bit_get(digitalPinToPort(pinNumber), digitalPinToBitMask(pinNumber)));
+}
 
 
 #ifdef __cplusplus

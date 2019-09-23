@@ -110,6 +110,7 @@ typedef uint8_t pin_size_t;
 void pinMode(pin_size_t pinNumber, PinMode pinMode);
 void digitalWrite(pin_size_t pinNumber, PinStatus status);
 PinStatus digitalRead(pin_size_t pinNumber);
+void digitalToggle(pin_size_t pinNumber);
 
 int analogRead(pin_size_t pinNumber);  //TODO
 void analogReference(uint8_t mode); //TODO
