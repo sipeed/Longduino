@@ -24,7 +24,7 @@ static void testInitAnalogRead(void) {
 }
 
 void analogReference(AnalogReferenceMode mode) {
-#ifdef _VARIANT_SIPEED_LONGAN_NANO
+#ifdef BOARD_SIPEED_LONGAN_NANO
     /* Longan nano does not have external vref pin, do nothing here */
 #else
     analog_reference = mode;
@@ -36,7 +36,7 @@ int analogRead(pin_size_t pinNumber) {
         return -1;
     }
     testInitAnalogRead();
-#ifdef _VARIANT_SIPEED_LONGAN_NANO
+#ifdef BOARD_SIPEED_LONGAN_NANO
     if (PIN_MAP[pinNumber].adc_device != 0
         && PIN_MAP[pinNumber].gpio_device != 0) {
         adc_inserted_channel_config(
