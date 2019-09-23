@@ -11,5 +11,5 @@ platform_packages = framework-arduino-gd32v @ https://github.com/sipeed/Longduin
 
 Add follow url into `Boards Manager URLs`.
 ```
-https://bigbits.oss-cn-qingdao.aliyuncs.com/Arduino_for_GD32V/package_gd32v_index.json
+http://bigbits.oss-cn-qingdao.aliyuncs.com/Arduino_for_GD32V/package_longduino_index.json
 ```

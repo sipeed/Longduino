@@ -93,19 +93,18 @@ recipe.output.tmp_file={build.project_name}.bin
 recipe.output.save_file={build.project_name}.{build.variant}.bin
 
 # Uploader tools
-## GD-Link
-tools.gdlink.cmd=openocd
-tools.gdlink.path={runtime.tools.openocd.path}/bin/
-tools.gdlink.program.config={runtime.tools.openocd.path}/scripts/temp/openocd_gdlink.cfg
-tools.gdlink.program.pattern="{path}{cmd}" -d0 -f {program.config} -c "flash protect 0 0 last off; program {{build.path}/{build.project_name}.elf} verify; resume 0x20000000; exit;"
-
-## JLink
-tools.jlink.cmd=openocd
-tools.jlink.path={runtime.tools.openocd.path}/bin/
-tools.jlink.program.config={runtime.tools.openocd.path}/scripts/temp/openocd_jlink.cfg
-tools.jlink.program.pattern="{path}{cmd}" -d0 -f {program.config} -c "flash protect 0 0 last off; program {{build.path}/{build.project_name}.elf} verify; resume 0x20000000; exit;"
+## Openocd (Debug tools)
+tools.openocd.cmd=openocd
+tools.openocd.path={runtime.tools.openocd.path}/bin/
+tools.openocd.program.config={program.params.config}
+tools.openocd.program.pattern="{path}{cmd}" -s {runtime.tools.openocd.path}/share/openocd/scripts -f interface/{program.config} -c "transport select jtag" -f target/gd32vf103.cfg -c "adapter_khz 1000" -c "init; halt;" -c "flash protect 0 0 last off; program {{build.path}/{build.project_name}.elf} verify; mww 0xe004200c 0x4b5a6978; mww 0xe0042008 0x01; resume; exit 0;"
 
 ## Serial
 tools.serial.cmd=stm32flash
-tools.serial.path={runtime.tools.stm32duino.path}/
+tools.serial.path={runtime.tools.gd32vflash.path}/
 tools.serial.program.pattern="{path}{cmd}" -g 0x08000000 -b {build.burn_baudrate} -w {build.path}/{build.project_name}.bin {serial.port} 
+
+## DFU 
+tools.dfu.cmd=dfu-util
+tools.dfu.path={runtime.tools.gd32vflash.path}/
+tools.dfu.program.pattern="{path}{cmd}" -d {build.vid}:{build.pid} -a 0 --dfuse-address 0x08000000:leave -D "{build.path}/{build.project_name}.bin"

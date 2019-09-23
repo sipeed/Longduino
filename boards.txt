@@ -7,6 +7,10 @@ menu.toolsloc=Tool Install Location
 
 nano.name=Sipeed Longan Nano Board
 
+## VID PID
+nano.build.vid=28e9
+nano.build.pid=0189
+
 ## Toolchain
 nano.menu.toolsloc.default=Default
 nano.menu.toolsloc.default.compiler.path={runtime.tools.riscv-nuclei-elf-gcc.path}/bin/
@@ -20,7 +24,7 @@ nano.menu.burn_baudrate.115200=115200 bps
 nano.menu.burn_baudrate.115200.build.burn_baudrate=115200
 
 ## HXTAL freq value
-nano.build.hxtal_value=25000000UL
+nano.build.hxtal_value=8000000UL
 
 ## Point to the file for ./variants/<variant>/pins_arduino.h
 nano.build.variant=sipeed-longan-nano
@@ -38,7 +42,7 @@ nano.upload.tool=serial
 
 ## Limit is the 128KiB Flash. Assume half is used for something else.
 nano.upload.maximum_size=65536
-nano.build.ldscript={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103x8.lds
+nano.build.ldscript={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103xB.lds
 
 
 ##################################################

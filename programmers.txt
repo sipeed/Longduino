@@ -2,16 +2,31 @@ gdlink.name=GD-Link OpenOCD
 gdlink.communication=usb
 gdlink.program.params.verbose=-v
 gdlink.program.params.quiet=-q
-gdlink.program.tool=gdlink
+rvdebugger.program.params.config=gd-link.cfg
+gdlink.program.tool=openocd
 
 jlink.name=JLink OpenOCD
 jlink.communication=usb
 jlink.program.params.verbose=-v
 jlink.program.params.quiet=-q
-jlink.program.tool=jlink
+rvdebugger.program.params.config=jlink.cfg
+jlink.program.tool=openocd
+
+rvdebugger.name=Sipeed RV Debugger
+rvdebugger.communication=usb
+rvdebugger.program.params.verbose=-v
+rvdebugger.program.params.quiet=-q
+rvdebugger.program.params.config=ftdi/sipeed-rv-debugger.cfg
+rvdebugger.program.tool=openocd
 
 serial.name=Serial GD32V
 serial.communication=usb
 serial.program.params.verbose=-v
 serial.program.params.quiet=-q
 serial.program.tool=serial
+
+dfu.name=DFU GD32V
+dfu.communication=usb
+dfu.program.params.verbose=-v
+dfu.program.params.quiet=-q
+dfu.program.tool=dfu
