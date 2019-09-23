@@ -1,5 +1,5 @@
-#ifndef _VARIANT_GD32VF103_EVAL
-#define _VARIANT_GD32VF103_EVAL
+#ifndef _VARIANT_SIPEED_LONGAN_NANO
+#define _VARIANT_SIPEED_LONGAN_NANO
 
 #include "Arduino.h"
 #include "gd32vf103.h"
@@ -35,14 +35,21 @@ typedef struct _gpio_dev_t
 
 }gpio_dev_t;
 
+typedef struct _adc_dev_t
+{
+    uint32_t adc_dev;
+    rcu_periph_enum clk_id;
+
+}adc_dev_t;
+
 typedef struct _gd32v_pin_info_t
 {
     gpio_dev_t * gpio_device;
     //timer_dev_t * timer_device;
-    //adc_dev_t * adc_device;
+    adc_dev_t * adc_device;
     uint8_t gpio_bit;
     //uint8_t timer_channel;
-    //uint8_t adc_channel;
+    uint8_t adc_channel;
 } gd32v_pin_info_t;
 
 #define VARIANT_GPIO_NUM (80)
