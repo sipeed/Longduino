@@ -46,6 +46,9 @@ void pinMode(pin_size_t pinNumber, PinMode pinMode)
     case INPUT_ANALOG:
         mode = GPIO_MODE_AIN;
         break;
+    case OUTPUT_ANALOG:
+        mode = GPIO_MODE_AF_PP;
+        break;
     default:
         return;
     }
