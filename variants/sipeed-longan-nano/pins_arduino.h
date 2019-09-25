@@ -42,13 +42,18 @@ typedef struct _adc_dev_t
 
 }adc_dev_t;
 
+typedef struct _timer_dev_t {
+    uint32_t timer_dev;
+    rcu_periph_enum clk_id;
+}timer_dev_t;
+
 typedef struct _gd32v_pin_info_t
 {
     gpio_dev_t * gpio_device;
-    //timer_dev_t * timer_device;
+    timer_dev_t * timer_device;
     adc_dev_t * adc_device;
     uint8_t gpio_bit;
-    //uint8_t timer_channel;
+    uint8_t timer_channel;
     uint8_t adc_channel;
 } gd32v_pin_info_t;
 

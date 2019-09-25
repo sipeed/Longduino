@@ -53,3 +53,48 @@ int analogRead(pin_size_t pinNumber) {
     }
 #endif
 }
+
+void analogWrite(pin_size_t pinNumber, int value) {
+    if (pinNumber > VARIANT_GPIO_NUM || value < 0 || value > 255) {
+        return;
+    }
+    timer_oc_parameter_struct timer_ocintpara;
+    timer_parameter_struct timer_initpara;
+    rcu_periph_clock_enable(PIN_MAP[pinNumber].timer_device->clk_id);
+    timer_deinit(PIN_MAP[pinNumber].timer_device->timer_dev);
+    timer_initpara.prescaler
+        = rcu_clock_freq_get(CK_APB1) == rcu_clock_freq_get(CK_AHB)
+        ? 2 * rcu_clock_freq_get(CK_APB1) / 1000000 - 1
+        : rcu_clock_freq_get(CK_APB1) / 1000000 - 1;
+    timer_initpara.alignedmode = TIMER_COUNTER_EDGE;
+    timer_initpara.counterdirection = TIMER_COUNTER_UP;
+    timer_initpara.period = 256;
+    timer_initpara.clockdivision = TIMER_CKDIV_DIV1;
+    timer_initpara.repetitioncounter = 0;
+    timer_init(PIN_MAP[pinNumber].timer_device->timer_dev, &timer_initpara);
+
+    timer_ocintpara.outputstate = TIMER_CCX_ENABLE;
+    timer_ocintpara.ocpolarity = TIMER_OC_POLARITY_HIGH;
+    if (PIN_MAP[pinNumber].timer_device->timer_dev == TIMER0) {
+        timer_ocintpara.outputnstate = TIMER_CCXN_DISABLE;
+        timer_ocintpara.ocnpolarity = TIMER_OCN_POLARITY_HIGH;
+        timer_ocintpara.ocidlestate = TIMER_OC_IDLE_STATE_LOW;
+        timer_ocintpara.ocnidlestate = TIMER_OCN_IDLE_STATE_LOW;
+    }
+    timer_channel_output_config(PIN_MAP[pinNumber].timer_device->timer_dev,
+        PIN_MAP[pinNumber].timer_channel, &timer_ocintpara);
+    timer_channel_output_pulse_value_config(
+        PIN_MAP[pinNumber].timer_device->timer_dev,
+        PIN_MAP[pinNumber].timer_channel, value);
+    timer_channel_output_mode_config(PIN_MAP[pinNumber].timer_device->timer_dev,
+        PIN_MAP[pinNumber].timer_channel, TIMER_OC_MODE_PWM0);
+    timer_channel_output_shadow_config(
+        PIN_MAP[pinNumber].timer_device->timer_dev,
+        PIN_MAP[pinNumber].timer_channel, TIMER_OC_SHADOW_DISABLE);
+    if (PIN_MAP[pinNumber].timer_device->timer_dev == TIMER0) {
+        timer_primary_output_config(
+            PIN_MAP[pinNumber].timer_device->timer_dev, ENABLE);
+    }
+    timer_auto_reload_shadow_enable(PIN_MAP[pinNumber].timer_device->timer_dev);
+    timer_enable(PIN_MAP[pinNumber].timer_device->timer_dev);
+}

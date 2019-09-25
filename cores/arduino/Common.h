@@ -26,6 +26,7 @@ typedef enum {
   INPUT_PULLUP    = 0x2,
   INPUT_PULLDOWN  = 0x3,
   INPUT_ANALOG    = 0x4,
+  OUTPUT_ANALOG   = 0x5,
 } PinMode;
 
 typedef enum {
@@ -119,7 +120,7 @@ void digitalToggle(pin_size_t pinNumber);
 
 int analogRead(pin_size_t pinNumber);
 void analogReference(AnalogReferenceMode mode);
-void analogWrite(pin_size_t pinNumber, int value);//TODO
+void analogWrite(pin_size_t pinNumber, int value);
 
 unsigned long millis(void);
 unsigned long micros(void);
