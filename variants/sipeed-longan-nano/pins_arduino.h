@@ -55,6 +55,7 @@ typedef struct _gd32v_pin_info_t
     uint8_t gpio_bit;
     uint8_t timer_channel;
     uint8_t adc_channel;
+    IRQn_Type irqn;
 } gd32v_pin_info_t;
 
 #define VARIANT_GPIO_NUM (80)

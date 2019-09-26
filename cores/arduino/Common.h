@@ -132,9 +132,9 @@ unsigned long pulseInLong(pin_size_t pin, uint8_t state, unsigned long timeout);
 void shiftOut(pin_size_t dataPin, pin_size_t clockPin, BitOrder bitOrder, uint8_t val);
 pin_size_t shiftIn(pin_size_t dataPin, pin_size_t clockPin, BitOrder bitOrder);
 
-void attachInterrupt(pin_size_t interruptNumber, voidFuncPtr callback, PinStatus mode);//TODO
-void attachInterruptParam(pin_size_t interruptNumber, voidFuncPtrParam callback, PinStatus mode, void* param);//TODO
-void detachInterrupt(pin_size_t interruptNumber);//TODO
+void attachInterrupt(pin_size_t interruptNumber, voidFuncPtr callback, PinStatus mode);
+void attachInterruptParam(pin_size_t interruptNumber, voidFuncPtrParam callback, PinStatus mode, void* param);
+void detachInterrupt(pin_size_t interruptNumber);
 
 void setup(void);
 void loop(void);
