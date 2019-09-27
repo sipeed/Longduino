@@ -24,16 +24,14 @@ unsigned long pulseIn(pin_size_t pin, uint8_t state, unsigned long timeout) {
     }
     uint64_t timeoutInCycles = timeout * _ClockCyclesPerMicrosecond();
     uint64_t start = get_mcycle();
-    while (gpio_input_bit_get(
-               PIN_MAP[pin].gpio_device->gpio_port, PIN_MAP[pin].gpio_bit)
+    while (gpio_input_bit_get(digitalPinToPort(pin), digitalPinToBitMask(pin))
         != state) {
         if (get_mcycle() - start > timeoutInCycles) {
             return 0;
         }
     }
     uint64_t pulseBegin = get_mcycle();
-    while (gpio_input_bit_get(
-               PIN_MAP[pin].gpio_device->gpio_port, PIN_MAP[pin].gpio_bit)
+    while (gpio_input_bit_get(digitalPinToPort(pin), digitalPinToBitMask(pin))
         == state) {
         if (get_mcycle() - start > timeoutInCycles) {
             return 0;
