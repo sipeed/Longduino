@@ -1,12 +1,12 @@
 #include "Arduino.h"
 #include "gd32vf103.h"
 
-unsigned long millis(void){
-    return (unsigned long)(get_timer_value() * (SystemCoreClock/4000.0));
+uint64_t millis(void){
+    return (uint64_t)(get_timer_value() * (4000.F / SystemCoreClock));
 }
 
-unsigned long micros(void){
-    return (unsigned long)(get_timer_value() * (SystemCoreClock/4000000.0));
+uint64_t micros(void){
+    return (uint64_t)(get_timer_value() * (4000000.F / SystemCoreClock));
 }
 
 void delay(unsigned long dwMs){
