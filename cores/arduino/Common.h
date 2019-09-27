@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 
+#include "gd32v/spi_com.h"
 
 #ifdef __cplusplus
 extern "C"{
