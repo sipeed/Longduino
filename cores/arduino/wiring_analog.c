@@ -52,6 +52,7 @@ int analogRead(pin_size_t pinNumber) {
         return -1;
     }
 #endif
+    return -1;
 }
 
 void analogWrite(pin_size_t pinNumber, int value) {
@@ -63,7 +64,7 @@ void analogWrite(pin_size_t pinNumber, int value) {
     rcu_periph_clock_enable(PIN_MAP[pinNumber].timer_device->clk_id);
     timer_deinit(PIN_MAP[pinNumber].timer_device->timer_dev);
     timer_initpara.prescaler
-        = rcu_clock_freq_get(CK_APB1) == rcu_clock_freq_get(CK_AHB)
+        = rcu_clock_freq_get(CK_APB1) != rcu_clock_freq_get(CK_AHB)
         ? 2 * rcu_clock_freq_get(CK_APB1) / 1000000 - 1
         : rcu_clock_freq_get(CK_APB1) / 1000000 - 1;
     timer_initpara.alignedmode = TIMER_COUNTER_EDGE;
