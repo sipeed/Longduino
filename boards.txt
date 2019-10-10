@@ -83,3 +83,44 @@ eval.upload.tool=gdlink
 eval.upload.maximum_size=65536
 eval.build.ldscript={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103xB.lds
 
+###################################################
+############# Seeed Wio Lite Risc-V ###############
+
+wio_lite-risc-v.name=Wio Lite Risc-V
+
+## VID PID
+wio_lite-risc-v.build.vid=28e9
+wio_lite-risc-v.build.pid=0189
+
+## Toolchain
+wio_lite-risc-v.menu.toolsloc.default=Default
+wio_lite-risc-v.menu.toolsloc.default.compiler.path={runtime.tools.riscv-nuclei-elf-gcc.path}/bin/
+
+## CPU Clock
+wio_lite-risc-v.menu.clksrc.108=108MHz CPU Clock Frequency
+wio_lite-risc-v.menu.clksrc.108.build.f_cpu=108000000L
+
+## Burn baud rate
+wio_lite-risc-v.menu.burn_baudrate.115200=115200 bps
+wio_lite-risc-v.menu.burn_baudrate.115200.build.burn_baudrate=115200
+
+## HXTAL freq value
+wio_lite-risc-v.build.hxtal_value=8000000UL
+
+## Point to the file for ./variants/<variant>/pins_arduino.h
+wio_lite-risc-v.build.variant=wio_lite_risc-v
+
+## "The 'core' file directory for this board, in ./cores
+wio_lite-risc-v.build.core=arduino
+
+## This sets a define for use in the compiled code.
+wio_lite-risc-v.build.board=BOARD_WIO_LITE_RISC-V
+wio_lite-risc-v.build.sdata.size=512
+
+## This selects the tool from "programmers.txt"
+wio_lite-risc-v.program.tool=serial
+wio_lite-risc-v.upload.tool=serial
+
+wio_lite-risc-v.upload.maximum_size=65536
+wio_lite-risc-v.build.ldscript={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103xB.lds
+
