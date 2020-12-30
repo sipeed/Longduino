@@ -1,5 +1,6 @@
 #include "gd32vf103.h"
 #include "pins_arduino.h"
+#include "riscv_encoding.h"
 #include <stdint.h>
 
 #define _ClockCyclesPerMicrosecond() (SystemCoreClock / 1000000)
@@ -13,8 +14,8 @@ union _mcycle_full {
 
 static inline uint64_t get_mcycle(void) {
     union _mcycle_full ret;
-    __asm("rdcycle %[l]" : [ l ] "=r"(ret.v_part[0]) :);
-    __asm("rdcycleh %[h]" : [ h ] "=r"(ret.v_part[1]) :);
+    __asm volatile("rdcycle %[l]" : [ l ] "=r"(ret.v_part[0]) :);
+    __asm volatile("rdcycleh %[h]" : [ h ] "=r"(ret.v_part[1]) :);
     return ret.v;
 }
 
@@ -22,6 +23,11 @@ unsigned long pulseIn(pin_size_t pin, uint8_t state, unsigned long timeout) {
     if (pin > VARIANT_GPIO_NUM) {
         return 0;
     }
+    
+    // enable cycle counter by resetting bit 0 of mcountinhibit register
+    uint32_t mcountinhibit = read_csr(0x320);
+    write_csr(0x320, mcountinhibit & 0xFFFFFFFE);
+    
     uint64_t timeoutInCycles = timeout * _ClockCyclesPerMicrosecond();
     uint64_t start = get_mcycle();
     while (gpio_input_bit_get(digitalPinToPort(pin), digitalPinToBitMask(pin))
