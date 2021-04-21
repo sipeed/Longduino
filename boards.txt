@@ -44,6 +44,48 @@ nano.upload.tool=serial
 nano.upload.maximum_size=65536
 nano.build.ldscript={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103xB.lds
 
+###########################################################
+############# Sipeed Longan Nano Lite Board ###############
+
+nanolite.name=Sipeed Longan Nano Lite Board 
+
+## VID PID
+nanolite.build.vid=28e9
+nanolite.build.pid=0189
+
+## Toolchain
+nanolite.menu.toolsloc.default=Default
+nanolite.menu.toolsloc.default.compiler.path={runtime.tools.riscv-nuclei-elf-gcc.path}/bin/
+
+## CPU Clock
+nanolite.menu.clksrc.108=108MHz CPU Clock Frequency
+nanolite.menu.clksrc.108.build.f_cpu=108000000L
+
+## Burn baud rate
+nanolite.menu.burn_baudrate.115200=115200 bps
+nanolite.menu.burn_baudrate.115200.build.burn_baudrate=115200
+
+## HXTAL freq value
+nanolite.build.hxtal_value=8000000UL
+
+## Point to the file for ./variants/<variant>/pins_arduino.h
+nanolite.build.variant=sipeed-longan-nano-lite
+
+## "The 'core' file directory for this board, in ./cores
+nanolite.build.core=arduino
+
+## This sets a define for use in the compiled code.
+nanolite.build.board=BOARD_SIPEED_LONGAN_NANO_LITE
+nanolite.build.sdata.size=512
+
+## This selects the tool from "programmers.txt"
+nanolite.program.tool=serial
+nanolite.upload.tool=serial
+
+## Limit is the 128KiB Flash. Assume half is used for something else.
+nanolite.upload.maximum_size=65536
+nanolite.upload.maximum_data_size=20480
+nanolite.build.ldscript={runtime.platform.path}/cores/arduino/GD32VF103_Firmware_Library/RISCV/env_Eclipse/GD32VF103x8.lds
 
 ##################################################
 ############# GD32VF103 EVAL Board ###############
